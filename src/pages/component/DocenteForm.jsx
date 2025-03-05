@@ -3,19 +3,22 @@ import { Dialog, DialogTitle, DialogContent, TextField, Button } from "@mui/mate
 import { saveDocente } from "../../api/index.js";
 
 export default function DocenteForm({ open, onClose, docente, refetch }) {
+  console.log('traje: ',docente.dni)
+
   const [formData, setFormData] = useState({ dni: "", apellido: "", nombres: "", domicilio: "", localidad: "", correoabc: "", telefono: "" });
 
   useEffect(() => {
     if (docente) {
       setFormData({
-        dni: docente[0] || "",
-        apellido: docente[1] || "",
-        nombres: docente[2] || "",
-        domicilio: docente[3] || "",
-        localidad: docente[4] || "",
-        correoabc: docente[5] || "",
-        telefono: docente[6] || ""
+        dni: docente.dni|| "",
+        apellido: docente.apellido || "",
+        nombres: docente.nombres || "",
+        domicilio: docente.domicilio || "",
+        localidad: docente.localidad || "",
+        correoabc: docente.correoabc || "",
+        telefono: docente.telefono || ""
       });
+      console.log('cargue el form: ',formData)
     } else {
       setFormData({ dni: "", apellido: "", nombres: "", domicilio: "", localidad: "", correoabc: "", telefono: "" });
     }
