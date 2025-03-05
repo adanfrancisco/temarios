@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Dialog, DialogTitle, DialogContent, TextField, Button, MenuItem } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, TextField, Button } from "@mui/material";
 import { saveDocente } from "../../api/index.js";
 
 export default function DocenteForm({ open, onClose, docente, refetch }) {
-  const [formData, setFormData] = useState({ dni: "", apellido: "", nombre: "", opcion: "A" });
+  const [formData, setFormData] = useState({ dni: "", apellido: "", nombres: "", domicilio: "", localidad: "", correoabc: "", telefono: "" });
 
   useEffect(() => {
     if (docente) {
       setFormData({
         dni: docente[0] || "",
         apellido: docente[1] || "",
-        nombre: docente[2] || "",
-        opcion: docente[3] || "A",
+        nombres: docente[2] || "",
+        domicilio: docente[3] || "",
+        localidad: docente[4] || "",
+        correoabc: docente[5] || "",
+        telefono: docente[6] || ""
       });
     } else {
-      setFormData({ dni: "", apellido: "", nombre: "", opcion: "A" });
+      setFormData({ dni: "", apellido: "", nombres: "", domicilio: "", localidad: "", correoabc: "", telefono: "" });
     }
   }, [docente]);
 
@@ -24,6 +27,7 @@ export default function DocenteForm({ open, onClose, docente, refetch }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('nuevo docente: ',formData)
     await saveDocente(formData);
     refetch();
     onClose();
@@ -52,25 +56,45 @@ export default function DocenteForm({ open, onClose, docente, refetch }) {
             margin="normal"
           />
           <TextField
-            label="Nombre"
-            name="nombre"
-            value={formData.nombre}
+            label="Nombres"
+            name="nombres"
+            value={formData.nombres}
             onChange={handleChange}
             fullWidth
             margin="normal"
           />
           <TextField
-            select
-            label="Opción"
-            name="opcion"
-            value={formData.opcion}
+            label="Domicilio"
+            name="domicilio"
+            value={formData.domicilio}
             onChange={handleChange}
             fullWidth
             margin="normal"
-          >
-            <MenuItem value="A">A</MenuItem>
-            <MenuItem value="B">B</MenuItem>
-          </TextField>
+          />
+          <TextField
+            label="Localidad"
+            name="localidad"
+            value={formData.localidad}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Correo"
+            name="correoabc"
+            value={formData.correoabc}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Teléfono"
+            name="telefono"
+            value={formData.telefono}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Guardar
           </Button>

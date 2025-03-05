@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Container, TextField, Button, Typography, Paper } from "@mui/material";
 import { useNavigate } from "react-router";
-import axios
+import axios from "axios";
+import Swal from 'sweetalert2'
 
 export default function Login() {
     let navigate = useNavigate();
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [credentials, setCredentials] = useState({ email: "", dni: "" });
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -16,12 +17,18 @@ export default function Login() {
 
     try {
         const response = await axios.get("http://localhost:3001/login", {
-          params: { dni, email },
+          params: { email: credentials.email, dni: credentials.dni },
         });
+        console.log(response.data.token)
         localStorage.setItem("token", response.data.token);
-        navigate("/dashboard");
+        navigate("/docentes");
       } catch (err) {
-        setError("DNI o Email incorrectos");
+        Swal.fire({
+          title: 'Error!',
+          text: err,
+          icon: 'error',
+          confirmButtonText: 'Cool'
+        })
       }
     };
 //     if (credentials.email === "admin@test.com" && credentials.password === "1234") {
@@ -45,7 +52,7 @@ export default function Login() {
         />
         <TextField
           label="Contraseña"
-          name="password"
+          name="dni"
           type="password"
           fullWidth
           margin="normal"
