@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogTitle, DialogContent, TextField, Button } from "@mui/material";
-import { saveDocente } from "../../api/index.js";
+import { saveDocente, updateDocente } from "../../api/index.js";
+import Swal from "sweetalert2";
 
 export default function DocenteForm({ open, onClose, docente, refetch }) {
-  console.log('traje: ',docente.dni)
-
-  const [formData, setFormData] = useState({ dni: "", apellido: "", nombres: "", domicilio: "", localidad: "", correoabc: "", telefono: "" });
+  const [formData, setFormData] = useState({ dni: "", apellido: "", nombres: "", domicilio: "", localidad: "", email: "", telefono: "" });
 
   useEffect(() => {
     if (docente) {
       setFormData({
-        dni: docente.dni|| "",
+        dni: docente.dni || "",
         apellido: docente.apellido || "",
         nombres: docente.nombres || "",
         domicilio: docente.domicilio || "",
         localidad: docente.localidad || "",
-        correoabc: docente.correoabc || "",
+        email: docente.email || "",
         telefono: docente.telefono || ""
       });
-      console.log('cargue el form: ',formData)
     } else {
-      setFormData({ dni: "", apellido: "", nombres: "", domicilio: "", localidad: "", correoabc: "", telefono: "" });
+      setFormData({ dni: "", apellido: "", nombres: "", domicilio: "", localidad: "", email: "", telefono: "" });
     }
   }, [docente]);
 
@@ -30,10 +28,22 @@ export default function DocenteForm({ open, onClose, docente, refetch }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('nuevo docente: ',formData)
-    await saveDocente(formData);
-    refetch();
-    onClose();
+    console.log('nuevo docente: ', formData);
+    try {
+      if (docente) {
+        await updateDocente(formData);
+        Swal.fire("Éxito", "Docente actualizado correctamente", "success");
+      } else {
+        await saveDocente(formData);
+        Swal.fire("Éxito", "Docente guardado correctamente", "success");
+      }
+      refetch();
+      onClose();
+    } catch (error) {
+      console.error('Error:', error);
+      onClose();
+      Swal.fire("Error", error.message || "Hubo un problema al guardar el docente", "error");
+    }
   };
 
   return (
@@ -84,8 +94,8 @@ export default function DocenteForm({ open, onClose, docente, refetch }) {
           />
           <TextField
             label="Correo"
-            name="correoabc"
-            value={formData.correoabc}
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             fullWidth
             margin="normal"
