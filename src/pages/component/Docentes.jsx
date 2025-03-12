@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchDocentes } from "../../api/index.js";
 import DocenteList from "./DocenteList";
 import DocenteForm from "./DocenteForm";
+import usePersonStore from "../../stores/userStore.jsx";
 
 export default function Docentes() {
   const { data: docentes,  refetch } = useQuery({
@@ -22,6 +23,16 @@ export default function Docentes() {
     setOpen(true);
   };
 
+  const handleClose = () => {
+    usePersonStore.setState({ apellido: "", nombres: "", dni: "", typeUser: "" });
+    localStorage.removeItem("token");
+    localStorage.removeItem("materia-store");
+    localStorage.removeItem("person-store");
+
+
+    window.location.href = "/";
+  }
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
@@ -29,6 +40,9 @@ export default function Docentes() {
       </Typography>
       <Button onClick={() => handleOpen()} variant="contained" color="primary">
         Añadir Docente
+      </Button>
+      <Button onClick={() => handleClose ()} variant="contained" color="primary">
+        Salir
       </Button>
 
       <DocenteList

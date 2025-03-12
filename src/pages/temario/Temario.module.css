@@ -1,0 +1,36 @@
+.container {
+    margin-top: 80px; /* Para que no quede oculto detrás de la barra de navegación */
+    padding: 2rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: left;
+    min-width: 300px;
+  }
+
+  .card p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #333;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+
+    .card {
+      width: 90%;
+    }
+  }

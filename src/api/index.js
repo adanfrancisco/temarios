@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3001";
+const API_URL = "https://temarios-back.onrender.com";
 
 export async function fetchDocentes() {
   const response = await fetch(`${API_URL}/get-docentes`);
@@ -10,7 +10,7 @@ export async function fetchDocentes() {
 }
 
 export const saveDocente = async (docente) => {
-  const { dni, apellido, nombres, domicilio, localidad, correoabc, telefono } = docente;
+  const { dni, apellido, nombres, domicilio, localidad, correoabc, telefono, userType } = docente;
   console.log('voy a guardar a: ', docente);
   try {
     await axios.post(`${API_URL}/add-docente`, {
@@ -20,7 +20,8 @@ export const saveDocente = async (docente) => {
       domicilio,
       localidad,
       correoabc,
-      telefono
+      telefono,
+      userType
     });
   } catch (error) {
     console.error('Error saving docente:', error.response.data);
@@ -37,7 +38,7 @@ export const deleteDocente = async (dni) => {
 
 export const updateDocente = async (data) => {
   console.log('voy a actualizar: ', data);
-  const { dni, apellido, nombres, domicilio, localidad, email, telefono } = data;
+  const { dni, apellido, nombres, domicilio, localidad, email, telefono, userType } = data;
   const correoabc = email;
   try {
     const response = await axios.put(`${API_URL}/update-docente`, {
@@ -47,7 +48,8 @@ export const updateDocente = async (data) => {
       domicilio,
       localidad,
       correoabc,
-      telefono
+      telefono,
+      userType
     });
     return response.data;
   } catch (error) {

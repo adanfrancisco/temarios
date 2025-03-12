@@ -1,0 +1,81 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.title {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.menuContainer {
+  position: relative;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.menuButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: white;
+  color: black;
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdownMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownMenu ul li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdownMenu ul li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdownMenu ul ul {
+  margin-left: 15px;
+}
+
+.logoutButton {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.logoutButton:hover {
+  background-color: #e60000;
+}
