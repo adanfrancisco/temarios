@@ -4,7 +4,7 @@ import styles from './Navbar.module.css'
 import { useState, useEffect } from "react";
 import useParametros from "../../stores/useParametros";
 
-const NavBar = () => {
+const NavBar = ({apellido}) => {
   const [materias, setMaterias] = useState([]);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,13 +18,13 @@ const NavBar = () => {
     if (storedData) {
       const parsedData = JSON.parse(storedData);
       setMaterias(parsedData.state?.materias || []);
-      console.log('materias',parsedData.state?.materias)
+      console.log('materias', parsedData.state?.materias)
     }
   }, []);
   const cursos = [...new Set(materias.map(m => m.curso))];
 
   const handleLogout = () => {
-    userStore.setState({ apellido: "", nombres: "", dni: "", typeUser: "", id:"" });
+    userStore.setState({ apellido: "", nombres: "", dni: "", typeUser: "", id: "" });
     localStorage.removeItem("token");
     localStorage.removeItem("materia-store");
     localStorage.removeItem("person-store");
@@ -33,22 +33,22 @@ const NavBar = () => {
   };
 
 
-const handleSelect = (curso) => () => {
-  eliminarCurso('curso1');
-  setMenuOpen(!menuOpen)
+  const handleSelect = (curso) => () => {
+    eliminarCurso('curso1');
+    setMenuOpen(!menuOpen)
 
-  agregarCurso('curso1', { nombre: curso, solapa: 'je', docente: 'pepe' });
-  navigate(`/materia`, { replace: true });
-  console.table(curso)
-}
+    agregarCurso('curso1', { nombre: curso, solapa: 'je', docente: 'pepe' });
+    navigate(`/materia`, { replace: true });
+    console.table(curso)
+  }
 
   return (
     <nav className={styles.navbar}>
       <h1
         className={styles.title}
-
         onClick={() => navigate("/temario", { replace: true })}
-        >TEMARIO</h1>
+      >TEMARIO</h1>
+      <small>{apellido}</small>
 
       <div className={styles.menuContainer}>
         <button onClick={() => setMenuOpen(!menuOpen)} className={styles.menuButton}>
@@ -58,13 +58,14 @@ const handleSelect = (curso) => () => {
           <div className={styles.dropdownMenu}>
 
 
-        <ul>
-          {cursos.map((curso, index) => (
-            <li key={index} value={curso}
-            onClick={handleSelect(curso)}
-            >{curso}</li>
-          ))}
-        </ul>
+            <ul>
+              {cursos.map((curso, index) => (
+                <li key={index} value={curso}
+                  onClick={handleSelect(curso)}
+                >{curso}</li>
+              ))}
+            </ul>
+
           </div>
         )}
       </div>

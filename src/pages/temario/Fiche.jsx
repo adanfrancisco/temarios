@@ -2,7 +2,7 @@ import userStore from "../../stores/userStore";
 import styles from "./Temario.module.css";
 
 const Fiche = () => {
-    const { apellido, nombres, dni, typeUser, id } = userStore(state => state);
+    const { apellido, nombres, dni } = userStore(state => state);
   return (
     <div>
 
@@ -18,12 +18,10 @@ const Fiche = () => {
           <p>
             DNI: {dni}
           </p>
-          <p>
+          {/* <p>
             TIPO: {typeUser}
-          </p>
-          <p>
-            ID: {id}
-          </p>
+          </p> */}
+
         </div>
       </div>
 
