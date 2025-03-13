@@ -29,6 +29,7 @@ export default function DocenteList({ docentes, onEdit, refetch }) {
             <TableCell>Teléfono</TableCell>
             <TableCell>tipo</TableCell>
             <TableCell>Acciones</TableCell>
+            <TableCell>Fecha</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -40,6 +41,7 @@ export default function DocenteList({ docentes, onEdit, refetch }) {
               <TableCell>{doc.email}</TableCell>
               <TableCell>{doc.telefono}</TableCell>
               <TableCell>{doc.userType}</TableCell>
+              <TableCell>{doc.fecha}</TableCell>
               <TableCell>
                 <Button onClick={() => onEdit(doc)} variant="contained" color="warning">Editar</Button>
                 <Button onClick={() => handleDelete(doc.dni)} variant="contained" color="error">Eliminar</Button>

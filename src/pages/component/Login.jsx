@@ -31,7 +31,8 @@ export default function Login() {
         email: resUsuario.data.result.email,
         dni: resUsuario.data.result.dni,
         typeUser: resUsuario.data.result.userType,
-        id: resUsuario.data.result.id
+        id: resUsuario.data.result.id,
+        fecha: resUsuario.data.result.fecha
       });
 
       console.log("tipo de usuario:", resUsuario.data.result.userType);
@@ -46,6 +47,7 @@ export default function Login() {
           curso: materia.curso,
           division: materia.division,
           id: materia.id,
+
 
         }))
       });
