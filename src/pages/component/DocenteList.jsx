@@ -1,21 +1,21 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
-import { deleteDocente } from "../../api/index.js";
+// import { deleteDocente } from "../../api/index.js";
 import Swal from "sweetalert2";
 
-export default function DocenteList({ docentes, onEdit, refetch }) {
-  const handleDelete = async (dni) => {
-    const result = await Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Esta acción no se puede deshacer!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Sí, eliminar!",
-    });
-    if (result.isConfirmed) {
-      await deleteDocente(dni);
-      refetch();
-    }
-  };
+export default function DocenteList({ docentes, onEdit }){//, refetch }) {
+  // const handleDelete = async (dni) => {
+  //   const result = await Swal.fire({
+  //     title: "¿Estás seguro?",
+  //     text: "Esta acción no se puede deshacer!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Sí, eliminar!",
+  //   });
+  //   if (result.isConfirmed) {
+  //     await deleteDocente(dni);
+  //     refetch();
+  //   }
+  // };
 
   return (
     <TableContainer component={Paper}>
@@ -44,7 +44,7 @@ export default function DocenteList({ docentes, onEdit, refetch }) {
               <TableCell>{doc.fecha}</TableCell>
               <TableCell>
                 <Button onClick={() => onEdit(doc)} variant="contained" color="warning">Editar</Button>
-                <Button onClick={() => handleDelete(doc.dni)} variant="contained" color="error">Eliminar</Button>
+                {/* <Button onClick={() => handleDelete(doc.dni)} variant="contained" color="error">Eliminar</Button> */}
               </TableCell>
             </TableRow>
           ))}
