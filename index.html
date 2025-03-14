@@ -1,13 +1,31 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TEMARIOS ISFT3931</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEMARIOS ISFT3931</title>
+  <script>
+    document.onkeydown = function (e) {
+      tecla = (document.all) ? e.keyCode : e.which;
+      alert(tecla)
+      if (tecla == 116) {
+
+          return false;
+
+      }
+    }
+    function NoBack() {
+      history.go(1)
+    }
+  </script>>
+
+</head>
+
+<body OnLoad="NoBack();">
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

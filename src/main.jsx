@@ -1,5 +1,4 @@
 import { createRoot } from "react-dom/client";
-// import "./index.css";
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -15,6 +14,7 @@ import {
   Temario
 } from "./pages/component";
 import Materia from "./pages/temario/Materia.jsx";
+
 const queryClient = new QueryClient();
 
 

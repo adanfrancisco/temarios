@@ -33,7 +33,7 @@ export default function DocenteList({ docentes, onEdit }){//, refetch }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {docentes.map((doc) => (
+          {docentes.slice(1).map((doc) => (
             <TableRow key={doc.dni}>
               <TableCell>{doc.dni}</TableCell>
               <TableCell>{doc.apellido}</TableCell>
