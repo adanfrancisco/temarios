@@ -15,10 +15,10 @@ const Temario = () => {
 
   // console.log(arr);
   return (
-    <div>
+    <>
       <NavBar apellido={apellido}/>
-      <Fiche />
-    </div>
+      <Fiche  />
+    </>
   );
 };
 

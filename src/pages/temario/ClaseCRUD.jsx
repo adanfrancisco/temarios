@@ -24,6 +24,7 @@ const API_URL = "https://temarios-back.onrender.com/clases";
 export default function ClaseCRUD() {
   const mate = useParametros((state) => state.cursos);
   const materiaSeleccionada = mate.curso1.nombre;
+  const [presionaboton,setPresionaboton] = useState(false)
 
   const [clases, setClases] = useState([]);
   const [open, setOpen] = useState(false);
@@ -82,7 +83,7 @@ export default function ClaseCRUD() {
     const url = editando
       ? `${API_URL}/${materiaSeleccionada}/${editando}`
       : `${API_URL}/${materiaSeleccionada}`;
-
+    setPresionaboton(!presionaboton)
     try {
       console.log(url + method + formData)
       const response = await fetch(url, {
@@ -94,8 +95,8 @@ export default function ClaseCRUD() {
       if (!response.ok) throw new Error("Error al guardar la clase");
 
       Swal.fire("Éxito", "Clase guardada correctamente", "success");
-      setOpen(false);
       window.location.reload();
+      setOpen(false);
     } catch (error) {
       Swal.fire("Error", error.message, "error");
     }
@@ -182,7 +183,13 @@ export default function ClaseCRUD() {
             <TextField label="N° de Clase" name="numeroClase" value={formData.numeroClase} onChange={handleChange} fullWidth margin="normal" />
             <TextField label="Tema" name="tema" value={formData.tema} onChange={handleChange} fullWidth margin="normal" />
             <TextField label="Actividades" name="actividades" value={formData.actividades} onChange={handleChange} fullWidth margin="normal" multiline rows={4} />
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              enabled={!presionaboton}
+              >
               Guardar
             </Button>
           </form>
