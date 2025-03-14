@@ -18,10 +18,9 @@ const Fiche = () => {
           <p>
             DNI: {dni}
           </p>
-          {/* <p>
-            TIPO: {typeUser}
-          </p> */}
-          <p>Dirijase a su materia por favor, tanto para escribir en el temario como para verificar que se guardó su clase</p>
+          <p>Dirijase a su materia por favor, tanto para escribir en el temario como para verificar que se guardó su clase
+
+          </p>
         </div>
       </div>
 
