@@ -1,11 +1,5 @@
 {
-    "rewrites": [
-      { "source": "/login", "destination": "/" },
-      { "source": "/docentes", "destination": "/" },
-      { "source": "/docentes/form", "destination": "/" },
-      { "source": "/docentes/list", "destination": "/" },
-      { "source": "/temario", "destination": "/" },
-      { "source": "/materia", "destination": "/" },
-      { "source": "/(.*)", "destination": "/" }
+    "routes": [
+      { "src": "/.*", "dest": "/index.html" }
     ]
   }
