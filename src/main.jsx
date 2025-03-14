@@ -33,5 +33,5 @@ createRoot(document.getElementById("root")).render(
         <Route path="*" element={<ErrorScreen />} />
       </Routes>
     </Router>
-  </QueryClientProvider>
+   </QueryClientProvider>
 );
