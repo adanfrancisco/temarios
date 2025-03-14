@@ -17,6 +17,7 @@ import {
 import { Edit, Delete, NorthWest } from "@mui/icons-material";
 import Swal from "sweetalert2";
 import useParametros from "../../stores/useParametros"; // Importa el store de Zustand
+import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
 const API_URL = "https://temarios-back.onrender.com/clases";
@@ -24,7 +25,7 @@ const API_URL = "https://temarios-back.onrender.com/clases";
 export default function ClaseCRUD() {
   const mate = useParametros((state) => state.cursos);
   const materiaSeleccionada = mate.curso1.nombre;
-  const [presionaboton,setPresionaboton] = useState(false)
+  const [presionaboton, setPresionaboton] = useState(false)
 
   const [clases, setClases] = useState([]);
   const [open, setOpen] = useState(false);
@@ -37,7 +38,7 @@ export default function ClaseCRUD() {
     actividades: "LAS ACTIVIDADES",
     materia: materiaSeleccionada ? materiaSeleccionada.nombre : "" // Usa la materia desde Zustand
   });
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (materiaSeleccionada) {
       fetch(`${API_URL}/${materiaSeleccionada}`)
@@ -95,7 +96,9 @@ export default function ClaseCRUD() {
       if (!response.ok) throw new Error("Error al guardar la clase");
 
       Swal.fire("Éxito", "Clase guardada correctamente", "success");
-      window.location.reload();
+      // window.location.reload();
+      navigate("/temario");
+
 
       setOpen(false);
     } catch (error) {
@@ -190,7 +193,7 @@ export default function ClaseCRUD() {
               color="primary"
               fullWidth
               enabled={!presionaboton}
-              >
+            >
               Guardar
             </Button>
           </form>
