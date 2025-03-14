@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "https://temarios-back.onrender.com";
 
 // Guardar nueva clase
 export const saveClase = async (claseData) => {
