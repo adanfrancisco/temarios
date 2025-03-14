@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router-dom";
 import userStore from "../../stores/userStore";
 import styles from './Navbar.module.css'
 import { useState, useEffect } from "react";

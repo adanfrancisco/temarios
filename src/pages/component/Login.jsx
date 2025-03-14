@@ -2,7 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { Container, TextField, Button, Typography, Paper } from "@mui/material";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import usePersonStore from "../../stores/userStore";
 import useMateriaStore from "../../stores/useMateriaStore";
 

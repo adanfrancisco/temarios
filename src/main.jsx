@@ -2,7 +2,7 @@ import { createRoot } from "react-dom/client";
 // import "./index.css";
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/component/Login.jsx";
 import ErrorScreen from "./pages/component/ErrorScreen.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
