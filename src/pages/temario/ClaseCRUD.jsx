@@ -95,7 +95,8 @@ export default function ClaseCRUD() {
       if (!response.ok) throw new Error("Error al guardar la clase");
 
       Swal.fire("Éxito", "Clase guardada correctamente", "success");
-      window.location.reload();
+      // window.location.reload();
+
       setOpen(false);
     } catch (error) {
       Swal.fire("Error", error.message, "error");
