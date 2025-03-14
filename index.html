@@ -9,17 +9,20 @@
   <script>
     document.onkeydown = function (e) {
       tecla = (document.all) ? e.keyCode : e.which;
-      alert(tecla)
+      // alert(tecla)
       if (tecla == 116) {
-
+        return false;
+        if (confirm("Seguro que quieres refrescar la página ") == true) {
+          return true;
+        } else {
           return false;
-
+        }
       }
     }
     function NoBack() {
       history.go(1)
     }
-  </script>>
+  </script>
 
 </head>
 
