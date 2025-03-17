@@ -106,6 +106,7 @@ export default function ClaseCRUD() {
       <Button variant="contained" color="primary" onClick={() => handleOpen()}>
         Añadir Clase
       </Button>
+<TextField label="Materia" name="materia" value={materiaSeleccionada} onChange={handleChange} fullWidth margin="normal" disabled />
       <TableContainer component={Paper} style={{ marginTop: 20 }}>
         <Table>
           <TableHead>
@@ -123,7 +124,7 @@ export default function ClaseCRUD() {
               </TableRow>
             ) : error ? (
               <TableRow>
-                <TableCell colSpan={4}>Error al cargar las clases</TableCell>
+                <TableCell colSpan={4}>Error al cargar las clases, o aún no hay clases</TableCell>
               </TableRow>
             ) : clases.length === 0 ? (
               <TableRow>

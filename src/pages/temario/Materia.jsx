@@ -10,6 +10,7 @@ const Materia = () => {
   return (
     <>
         <NavBar />
+
         {materiaSeleccionada && <ClaseCRUD materiaSeleccionada={materiaNombre} />}
         {/* <br /><br />
         {Object.entries(materiaSeleccionada).map(([clave, materiaSeleccionada]) => (

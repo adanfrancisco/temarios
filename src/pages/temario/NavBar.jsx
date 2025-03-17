@@ -4,7 +4,7 @@ import styles from './Navbar.module.css'
 import { useState, useEffect } from "react";
 import useParametros from "../../stores/useParametros";
 
-const NavBar = ({apellido}) => {
+const NavBar = ({ apellido }) => {
   const [materias, setMaterias] = useState([]);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,6 +37,7 @@ const NavBar = ({apellido}) => {
     eliminarCurso('curso1');
     setMenuOpen(!menuOpen)
 
+    //guardo la materia en el estado
     agregarCurso('curso1', { nombre: curso, solapa: 'je', docente: 'pepe' });
     navigate(`/materia`, { replace: true });
     console.table(curso)

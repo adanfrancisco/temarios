@@ -100,6 +100,7 @@ export default function ClaseCRUD({ materia }) {
       <Button variant="contained" color="primary" onClick={() => handleOpen()}>
         Añadir Clase
       </Button>
+
       <TableContainer component={Paper} style={{ marginTop: 20 }}>
         <Table>
           <TableHead>

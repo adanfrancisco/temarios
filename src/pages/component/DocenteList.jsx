@@ -28,8 +28,8 @@ export default function DocenteList({ docentes, onEdit }){//, refetch }) {
             <TableCell>Email</TableCell>
             <TableCell>Teléfono</TableCell>
             <TableCell>tipo</TableCell>
-            <TableCell>Acciones</TableCell>
             <TableCell>Fecha</TableCell>
+            <TableCell>Acciones</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
