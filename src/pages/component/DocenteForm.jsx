@@ -12,7 +12,7 @@ import {
   FormControl
 } from "@mui/material";
 
-import { saveDocente, updateDocente } from "../../api/index.js";
+import { saveDocente, updateDocente} from "../../api/index.js";
 import Swal from "sweetalert2";
 
 export default function DocenteForm({ open, onClose, docente, refetch }) {

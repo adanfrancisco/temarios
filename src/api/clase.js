@@ -1,4 +1,4 @@
-const API_URL = "https://temarios-back.onrender.com";
+const API_URL=import.meta.env.VITE_URL_SCRIPTS;
 
 // Guardar nueva clase
 export const saveClase = async (claseData) => {

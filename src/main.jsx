@@ -14,6 +14,7 @@ import {
   Temario
 } from "./pages/component";
 import Materia from "./pages/temario/Materia.jsx";
+import AttendanceForm from "./pages/asistencia/AttendanceForm.jsx";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/docentes/list" element={<DocenteList />} />
         <Route path="/temario" element={<Temario />} />
         <Route path="/materia" element={<Materia />} />
+        <Route path="/asistencia" element={<AttendanceForm />} />
 
         <Route path="*" element={<ErrorScreen />} />
       </Routes>

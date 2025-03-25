@@ -2,7 +2,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 // import { deleteDocente } from "../../api/index.js";
 import Swal from "sweetalert2";
 
-export default function DocenteList({ docentes, onEdit }){//, refetch }) {
+export default function DocenteList({ docentes, onEdit , onAusente}){//, refetch }) {
   // const handleDelete = async (dni) => {
   //   const result = await Swal.fire({
   //     title: "¿Estás seguro?",
@@ -43,6 +43,7 @@ export default function DocenteList({ docentes, onEdit }){//, refetch }) {
               <TableCell>{doc.userType}</TableCell>
               <TableCell>{doc.fecha}</TableCell>
               <TableCell>
+                <Button onClick={() => onAusente(doc)} variant="contained" color="inherit" >AUSENTE</Button>
                 <Button onClick={() => onEdit(doc)} variant="contained" color="warning">Editar</Button>
                 {/* <Button onClick={() => handleDelete(doc.dni)} variant="contained" color="error">Eliminar</Button> */}
               </TableCell>

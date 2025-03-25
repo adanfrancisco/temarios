@@ -1,6 +1,8 @@
 import axios from "axios";
+const API_URL=import.meta.env.VITE_BACK_LOGIN;
 
-const API_URL = "https://temarios-back.onrender.com";
+// const API_URL = "https://temarios-back.onrender.com";
+
 
 export async function fetchDocentes() {
   const response = await fetch(`${API_URL}/get-docentes`);
@@ -50,6 +52,22 @@ export const updateDocente = async (data) => {
       correoabc,
       telefono,
       userType
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating docente:', error);
+    throw error;
+  }
+};
+export const ausenteDocente = async (data) => {
+  console.log('Registro inasistencia: ', data);
+  const { dni, apellido, nombres, motivo } = data;
+  try {
+    const response = await axios.post(`${API_URL}/ausentes`, {
+      dni,
+      apellido,
+      nombres,
+      motivo
     });
     return response.data;
   } catch (error) {

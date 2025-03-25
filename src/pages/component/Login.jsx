@@ -6,24 +6,27 @@ import { useNavigate } from "react-router-dom";
 import usePersonStore from "../../stores/userStore";
 import useMateriaStore from "../../stores/useMateriaStore";
 
+// const BACK_LOGIN=import.meta.env.VITE_URL_SCRIPTS;
+const BACK_LOGIN = import.meta.env.VITE_BACK_LOGIN;
+
 export default function Login() {
   let navigate = useNavigate();
   const [credentials, setCredentials] = useState({ email: "", dni: "" });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const resUsuario = await axios.get("https://temarios-back.onrender.com/login", {
-        params: { email: credentials.email, dni: credentials.dni }
+      const resUsuario = await axios.get(`${BACK_LOGIN}/login`, {
+        params: { email: credentials.email, dni: credentials.dni },
       });
 
       // console.log("resMateria: ", resMateria.data.result);
-      console.log("resUsuario: ", resUsuario.data.result);
+      console.log("resUsuario: ", resUsuario.data.result.dni);
 
       usePersonStore.setState({
         apellido: resUsuario.data.result.apellido,
@@ -32,26 +35,26 @@ export default function Login() {
         dni: resUsuario.data.result.dni,
         typeUser: resUsuario.data.result.userType,
         id: resUsuario.data.result.id,
-        fecha: resUsuario.data.result.fecha
+        fecha: resUsuario.data.result.fecha,
       });
 
       console.log("tipo de usuario:", resUsuario.data.result.userType);
       if (resUsuario.data.result.userType == "user") {
-      const resMateria = await axios.get(`https://temarios-back.onrender.com/get-materias?dni=${credentials.dni}`)
+        const resMateria = await axios.get(
+          `${BACK_LOGIN}/get-materias?dni=${credentials.dni}`
+        );
 
-      // console.log(resMateria)
-      useMateriaStore.setState({
-        materias: resMateria.data.result.map(materia => ({
-          apellido: materia.apellido,
-          dni: materia.dni,
-          curso: materia.curso,
-          division: materia.division,
-          id: materia.id,
-
-
-        }))
-      });
-    }
+        // console.log(resMateria)
+        useMateriaStore.setState({
+          materias: resMateria.data.result.map((materia) => ({
+            apellido: materia.apellido,
+            dni: materia.dni,
+            curso: materia.curso,
+            division: materia.division,
+            id: materia.id,
+          })),
+        });
+      }
       if (resUsuario.data.result.userType == "user") {
         navigate("/temario");
       } else {
@@ -63,11 +66,10 @@ export default function Login() {
         title: "Error!",
         text: err,
         icon: "error",
-        confirmButtonText: "Cool"
+        confirmButtonText: "Cool",
       });
     }
   };
-
 
   return (
     <Container component={Paper} style={{ padding: 20, maxWidth: 400 }}>

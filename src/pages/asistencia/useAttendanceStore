@@ -1,0 +1,17 @@
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+const useAttendanceStore = create(persist(
+  (set) => ({
+    asistencias: [],
+    setAsistencias: (data) => set({ asistencias: data }),
+    agregarAsistencia: (asistencia) => set((state) => ({
+      asistencias: [...state.asistencias, asistencia]
+    }))
+  }),
+  {
+    name: 'attendance-storage'
+  }
+));
+
+export default useAttendanceStore;
