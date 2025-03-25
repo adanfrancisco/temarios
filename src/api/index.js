@@ -62,13 +62,14 @@ export const updateDocente = async (data) => {
 
 export const ausenteDocente = async (data) => {
   console.log('Registro inasistencia: ', data);
-  const { dni, apellido, nombres, motivo } = data;
+  const { dni, apellido, nombres, motivo,fecha } = data;
   try {
     const response = await axios.post(`${API_URL}/ausentes`, {
-      dni,
-      apellido,
-      nombres,
-      motivo
+      "dni":dni,
+      "apellido":apellido,
+      "nombres":nombres,
+      "motivo":motivo,
+      "fecha":fecha
     });
     return response.data;
   } catch (error) {

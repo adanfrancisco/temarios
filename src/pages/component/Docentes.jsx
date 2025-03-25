@@ -79,7 +79,6 @@ export default function Docentes() {
       if (formValues) {
         docente.motivo = formValues.motivo;
         docente.fecha = formValues.fecha; // Guarda la fecha seleccionada
-        console.log("Docente actualizado:", docente);
 
         const data = await ausenteDocente(docente);
         console.log("Respuesta del servidor:", data);
