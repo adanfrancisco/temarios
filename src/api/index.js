@@ -59,6 +59,7 @@ export const updateDocente = async (data) => {
     throw error;
   }
 };
+
 export const ausenteDocente = async (data) => {
   console.log('Registro inasistencia: ', data);
   const { dni, apellido, nombres, motivo } = data;
