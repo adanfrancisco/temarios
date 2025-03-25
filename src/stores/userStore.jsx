@@ -3,7 +3,7 @@ import { devtools, persist } from 'zustand/middleware';
 const URL_SCRIPTS=import.meta.env.VITE_URL_SCRIPTS;
 
 const usePersonStore = create(devtools(
-  persist(
+  persist(devtools(
     (set) => ({
       apellido: '',
       nombres: '',
@@ -32,7 +32,7 @@ const usePersonStore = create(devtools(
           dni: '',
           typeUser: '',
         })),
-    }),
+    })),
     {
       name: 'person-store', // Nombre de la clave en localStorage
       getStorage: () => localStorage, // Cambia a sessionStorage si prefieres

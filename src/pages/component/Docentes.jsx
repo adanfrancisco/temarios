@@ -8,6 +8,8 @@ import usePersonStore from "../../stores/userStore.jsx";
 import Swal from "sweetalert2";
 
 export default function Docentes() {
+  const { apellido } = usePersonStore();
+
   const { data: docentes, refetch } = useQuery({
     queryKey: ["docentes"],
     queryFn: fetchDocentes
@@ -65,9 +67,12 @@ export default function Docentes() {
       <Typography variant="h4" gutterBottom>
         Gestión de Docentes
       </Typography>
-      <Button onClick={() => handleOpen()} variant="contained" color="primary">
-        Añadir Docente
-      </Button>
+      {
+        apellido === "ALOE" &&
+        <Button onClick={() => handleOpen()} variant="contained" color="primary">
+          Añadir Docente
+        </Button>
+      }
       <Button onClick={() => handleClose()} variant="contained" color="primary">
         Salir
       </Button>
