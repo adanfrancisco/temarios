@@ -82,10 +82,16 @@ export default function Docentes() {
 
         const data = await ausenteDocente(docente);
         console.log("Respuesta del servidor:", data);
-        refetch();
+        if (data) {
+          Swal.fire("Registro exitoso!", "El docente ha sido registrado como ausente.", "success");
+          refetch();
+        } else {
+          Swal.fire("Error", "No se pudo registrar el docente como ausente.", "error");
+        }
       }
     } catch (error) {
       console.error("Error en handleAusente:", error);
+      Swal.fire("Error", "No se pudo registrar el docente como ausente.", "error");
     }
   };
 
