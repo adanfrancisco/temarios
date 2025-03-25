@@ -69,7 +69,8 @@ export const ausenteDocente = async (data) => {
       "apellido":apellido,
       "nombres":nombres,
       "motivo":motivo,
-      "fecha":fecha
+      "fecha":fecha,
+      "hora":new Date().toLocaleTimeString()
     });
     return response.data;
   } catch (error) {
