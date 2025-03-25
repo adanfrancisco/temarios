@@ -19,22 +19,66 @@ export default function Docentes() {
   const [open, setOpen] = useState(false);
   const [selectedDocente, setSelectedDocente] = useState(null);
 
+  // const handleAusente = async (docente = {}) => {
+  //   if (!docente) return; // Evita errores si docente es null o undefined
+
+  //   try {
+  //     const { value: motivo } = await Swal.fire({
+  //       title: "Ingrese el motivo",
+  //       input: "text",
+  //       inputPlaceholder: "Escriba aquí...",
+  //       showCancelButton: true,
+  //       confirmButtonText: "Aceptar",
+  //       cancelButtonText: "Cancelar",
+  //       inputValidator: (value) => !value && "Debe ingresar un texto!"
+  //     });
+
+  //     if (motivo) {
+  //       docente.motivo = motivo;
+  //       console.log("Docente actualizado:", docente);
+
+  //       const data = await ausenteDocente(docente);
+  //       console.log("Respuesta del servidor:", data);
+  //       refetch();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error en handleAusente:", error);
+  //   }
+  // };
+
   const handleAusente = async (docente = {}) => {
     if (!docente) return; // Evita errores si docente es null o undefined
 
     try {
-      const { value: motivo } = await Swal.fire({
-        title: "Ingrese el motivo",
-        input: "text",
-        inputPlaceholder: "Escriba aquí...",
+      const { value: formValues } = await Swal.fire({
+        title: "Ingrese los datos",
+        html: `
+          <input id="motivo" class="swal2-input" placeholder="Ingrese el motivo">
+          <input id="fecha" type="date" class="swal2-input">
+        `,
+        focusConfirm: false,
         showCancelButton: true,
         confirmButtonText: "Aceptar",
         cancelButtonText: "Cancelar",
-        inputValidator: (value) => !value && "Debe ingresar un texto!"
+        preConfirm: () => {
+          const motivo = document.getElementById("motivo").value;
+          const fecha = document.getElementById("fecha").value;
+
+          if (!motivo) {
+            Swal.showValidationMessage("Debe ingresar un motivo!");
+            return false;
+          }
+          if (!fecha) {
+            Swal.showValidationMessage("Debe seleccionar una fecha!");
+            return false;
+          }
+          return { motivo, fecha };
+        }
       });
 
-      if (motivo) {
-        docente.motivo = motivo;
+      if (formValues) {
+        docente.motivo = formValues.motivo;
+        docente.fecha = formValues.fecha; // Guarda la fecha seleccionada
         console.log("Docente actualizado:", docente);
 
         const data = await ausenteDocente(docente);
