@@ -116,7 +116,7 @@ export default function ClaseCRUD() {
   return (
     <div>
       <Button variant="contained" color="primary" onClick={() => handleOpen()}>
-        Añadir Clase
+        AGREGAR
       </Button>
 
       <TableContainer component={Paper} style={{ marginTop: 20 }}>
