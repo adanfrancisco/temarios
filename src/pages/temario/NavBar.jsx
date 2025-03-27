@@ -72,7 +72,7 @@ const NavBar = ({ apellido }) => {
       </div>
 
       <button onClick={handleLogout} className={styles.logoutButton}>
-        Logout
+        SALIR
       </button>
     </nav>
 
