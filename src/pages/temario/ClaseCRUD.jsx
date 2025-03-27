@@ -16,7 +16,6 @@ import {
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useParametros from "../../stores/useParametros";
-// import { useNavigate } from "react-router-dom";
 
 const API_URL = "https://temarios-back.onrender.com/clases";
 
@@ -32,13 +31,13 @@ export default function ClaseCRUD() {
   const materiaSeleccionada = mate.curso1.nombre;
   const [open, setOpen] = useState(false);
   const [editando, setEditando] = useState(null);
-  // const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
-    fecha: new Date().toISOString().split("T")[0],
-    numeroClase: "1",
-    tema: "MI TEMA",
-    actividades: "LAS ACTIVIDADES",
+    fecha: "",
+    numeroClase: "",
+    tema: "",
+    actividades: "",
     materia: materiaSeleccionada || "",
   });
 
@@ -60,7 +59,6 @@ export default function ClaseCRUD() {
     onSuccess: () => {
       queryClient.invalidateQueries(["clases", materiaSeleccionada]);
       Swal.fire("Éxito", "Clase guardada correctamente", "success");
-      // navigate("/temario");
       setOpen(false);
     },
     onError: (error) => {
@@ -78,6 +76,7 @@ export default function ClaseCRUD() {
         materia: materiaSeleccionada || "",
       }
     );
+    setErrors({});
     setEditando(index);
     setOpen(true);
   };
@@ -86,14 +85,27 @@ export default function ClaseCRUD() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
+
+  const validateForm = () => {
+    let newErrors = {};
+    Object.keys(formData).forEach((key) => {
+      if (!formData[key]) {
+        newErrors[key] = "Este campo es obligatorio";
+      }
+    });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!materiaSeleccionada) {
-      Swal.fire("Error", "No hay materia seleccionada", "error");
+    if (!validateForm()) {
+      Swal.fire("Error", "Por favor, completa todos los campos", "error");
       return;
     }
+    
     const method = editando ? "PUT" : "POST";
     const url = editando
       ? `${API_URL}/${materiaSeleccionada}/${editando}`
@@ -106,7 +118,7 @@ export default function ClaseCRUD() {
       <Button variant="contained" color="primary" onClick={() => handleOpen()}>
         Añadir Clase
       </Button>
-<TextField label="Materia" name="materia" value={materiaSeleccionada} onChange={handleChange} fullWidth margin="normal" disabled />
+
       <TableContainer component={Paper} style={{ marginTop: 20 }}>
         <Table>
           <TableHead>
@@ -124,11 +136,7 @@ export default function ClaseCRUD() {
               </TableRow>
             ) : error ? (
               <TableRow>
-                <TableCell colSpan={4}>Error al cargar las clases, o aún no hay clases</TableCell>
-              </TableRow>
-            ) : clases.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={4}>No hay clases</TableCell>
+                <TableCell colSpan={4}>Error al cargar las clases</TableCell>
               </TableRow>
             ) : (
               clases.map((clase, index) => (
@@ -148,10 +156,10 @@ export default function ClaseCRUD() {
         <DialogTitle>{editando ? "Editar Clase" : "Añadir Clase"}</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
-            <TextField label="Fecha" name="fecha" type="date" value={formData.fecha} onChange={handleChange} fullWidth margin="normal" InputLabelProps={{ shrink: true }} />
-            <TextField label="N° de Clase" name="numeroClase" value={formData.numeroClase} onChange={handleChange} fullWidth margin="normal" type="number" />
-            <TextField label="Tema" name="tema" value={formData.tema} onChange={handleChange} fullWidth margin="normal" />
-            <TextField label="Actividades" name="actividades" value={formData.actividades} onChange={handleChange} fullWidth margin="normal" multiline rows={4} />
+            <TextField label="Fecha" name="fecha" type="date" value={formData.fecha} onChange={handleChange} fullWidth margin="normal" InputLabelProps={{ shrink: true }} error={!!errors.fecha} helperText={errors.fecha} />
+            <TextField label="N° de Clase" name="numeroClase" type="number" value={formData.numeroClase} onChange={handleChange} fullWidth margin="normal" error={!!errors.numeroClase} helperText={errors.numeroClase} />
+            <TextField label="Tema" name="tema" value={formData.tema} onChange={handleChange} fullWidth margin="normal" error={!!errors.tema} helperText={errors.tema} />
+            <TextField label="Actividades" name="actividades" value={formData.actividades} onChange={handleChange} fullWidth margin="normal" multiline rows={4} error={!!errors.actividades} helperText={errors.actividades} />
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Guardar
             </Button>
