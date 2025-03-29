@@ -19,7 +19,13 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    Swal.fire({
+      title: "Espere...",
+      text: "Ingresando al Sistema",
+      imageUrl: "https://i.gifer.com/ZZ5H.gif",
+      showConfirmButton: false,
+      allowOutsideClick: false,
+    });
     try {
       const resUsuario = await axios.get(`${BACK_LOGIN}/login`, {
         params: { email: credentials.email, dni: credentials.dni },
@@ -43,7 +49,7 @@ export default function Login() {
         const resMateria = await axios.get(
           `${BACK_LOGIN}/get-materias?dni=${credentials.dni}`
         );
-
+        Swal.fire("Éxito", "Entrada agregada correctamente", "success");
         // console.log(resMateria)
         useMateriaStore.setState({
           materias: resMateria.data.result.map((materia) => ({
@@ -56,8 +62,10 @@ export default function Login() {
         });
       }
       if (resUsuario.data.result.userType == "user") {
+        Swal.fire("Éxito", "Entrada agregada correctamente", "success");
         navigate("/temario");
       } else {
+        Swal.fire("Éxito", "Entrada agregada correctamente", "success");
         localStorage.setItem("token", resUsuario.data.token);
         navigate("/docentes");
       }
