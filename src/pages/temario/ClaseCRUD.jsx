@@ -16,8 +16,8 @@ import {
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useParametros from "../../stores/useParametros";
-
-const API_URL = "https://temarios-back.onrender.com/clases";
+const BACK_LOGIN = import.meta.env.VITE_BACK_LOGIN;
+const API_URL = `${BACK_LOGIN}/clases`;
 
 const fetchClases = async (materia) => {
   const res = await fetch(`${API_URL}/${materia}`);
@@ -118,6 +118,10 @@ export default function ClaseCRUD() {
       <Button variant="contained" color="primary" onClick={() => handleOpen()}>
         AGREGAR
       </Button>
+      {/* <Button variant="contained" color="primary" onClick={() => handleOpen()}>
+        ASISTENCIA
+      </Button> */}
+
 
       <TableContainer component={Paper} style={{ marginTop: 20 }}>
         <Table>

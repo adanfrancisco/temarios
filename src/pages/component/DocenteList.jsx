@@ -10,7 +10,7 @@ export default function DocenteList({ docentes, onEdit, onAusente }) {
     console.log("Apellido: ", apellido);
 
 
-  }, [])
+  }, [apellido])
 
 
   //, refetch }) {

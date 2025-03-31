@@ -36,3 +36,16 @@ export const useAddAsistencia = () => {
     }
   });
 };
+
+export const useUpdateAsistencia = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id, updatedAsistencia }) => {
+      await axios.put(`${API_URL}/${id}`, updatedAsistencia);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['asistencias']);
+    }
+  });
+};

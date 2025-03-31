@@ -62,10 +62,10 @@ export default function Login() {
         });
       }
       if (resUsuario.data.result.userType == "user") {
-        Swal.fire("Éxito", "Entrada agregada correctamente", "success");
+        Swal.fire("Éxito", "Ingreso Correcto al Sistema", "success");
         navigate("/temario");
       } else {
-        Swal.fire("Éxito", "Entrada agregada correctamente", "success");
+        Swal.fire("Éxito", "Ingreso Correcto", "success");
         localStorage.setItem("token", resUsuario.data.token);
         navigate("/docentes");
       }

@@ -1,14 +1,19 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
-const useAttendanceStore = create(persist(
+const useAttendanceStore = create(persist(devtools(
   (set) => ({
     asistencias: [],
     setAsistencias: (data) => set({ asistencias: data }),
     agregarAsistencia: (asistencia) => set((state) => ({
       asistencias: [...state.asistencias, asistencia]
+    })),
+    actualizarAsistencia: (id, nuevaAsistencia) => set((state) => ({
+      asistencias: state.asistencias.map((asistencia) =>
+        asistencia.id === id ? { ...asistencia, ...nuevaAsistencia } : asistencia
+      )
     }))
-  }),
+  })),
   {
     name: 'attendance-storage'
   }
